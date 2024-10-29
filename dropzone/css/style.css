@@ -28,18 +28,18 @@ body {
     overflow-y: hidden;
 }
 
-.hold {
-    border: 2px solid #ccc;
-    opacity: 30%;
-}
+/*.hold {*/
+/*    border: 2px solid #ccc;*/
+/*    opacity: 30%;*/
+/*}*/
 
 .hovered {
     border-style: dashed;
 }
 
-.invisible {
-    display: none;
-}
+/*.invisible {*/
+/*    display: none;*/
+/*}*/
 
 .dropzone-imagePreview {
     display: block;
