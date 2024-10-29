@@ -10,11 +10,14 @@ body {
 }
 
 .dropzone {
-    height: 210px;
-    width: 600px;
+    min-height: 210px;
     border: 2px solid rgba(81, 147, 225, 0.51);
     margin-right: 10px;
     border-radius: 20px;
+}
+
+.drop-zone-wrapper {
+    cursor: pointer;
 }
 
 #dropzone-items {
@@ -50,4 +53,8 @@ body {
     align-items: center;
     flex-flow: column;
     text-align: center;
+}
+
+.image-parent-container {
+
 }

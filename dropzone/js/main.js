@@ -1,17 +1,17 @@
 const dropzone = document.querySelector('.dropzone');
 const dropzoneItem = document.querySelector('#dropzone-items');
 const placeholderContainer = document.querySelector('.placeholder-container');
-
-// const fileInput = document.getElementById('fileInput');
+const fileInput = document.querySelector('#fileInput');
 
 dropzone.addEventListener('dragover', dragOver);
 dropzone.addEventListener('dragenter', dragEnter);
 dropzone.addEventListener('dragleave', dragLeave);
 dropzone.addEventListener('drop', dragDrop);
 
-// fileInput.addEventListener('change', (e) => {
-//     console.log(e)
-// })
+fileInput.addEventListener('change', (e) => {
+    const files = e.target.files;
+    handlePreview(files);
+})
 //Drag point
 function dragOver(e) {
     e.preventDefault();
@@ -49,14 +49,31 @@ function handlePreview(files) {
 
 function preview(file) {
     const img = document.createElement('img');
+    const imgParentContainer = document.createElement('div');
+    const imageName = document.createElement('div');
+    imgParentContainer.classList.add('image-parent-container');
+    imageName.textContent = modifyString(file.name);
+
     if (file) {
         const reader = new FileReader();
         reader.onload = function(event) {
             img.src = event.target.result;
+            img.alt = file.name;
             img.classList.add('dropzone-imagePreview');
-            dropzoneItem.appendChild(img);
+            imgParentContainer.appendChild(img)
+            imgParentContainer.appendChild(imageName)
+            dropzoneItem.appendChild(imgParentContainer);
 
         };
         reader.readAsDataURL(file);
     }
 }
+
+function modifyString(originalStr) {
+    const parts = originalStr.split('.');
+    const fileExtension = parts.pop();
+    const baseName = parts.join('.');
+    const modifiedBaseName = baseName.slice(0, 10) + '...';
+    return `${modifiedBaseName}${fileExtension ? '.' + fileExtension : ''}`;
+}
+

@@ -7,14 +7,16 @@
 <body>
     <h1>DropZone</h1>
     <div class="container">
-        <div class="dropzone" id='dropzone'>
-            <div id="dropzone-items"></div>
-            <div class="placeholder-container">
-                <img src="images/cloud.png" width="40" />
-                <div>Drop files here or upload</div>
+        <label for="fileInput" class="drop-zone-wrapper">
+            <div class="dropzone" id='dropzone'>
+                <div id="dropzone-items"></div>
+                <div class="placeholder-container">
+                    <img src="images/cloud.png" width="40" />
+                    <div>Drop images here or upload</div>
+                </div>
             </div>
-        </div>
-<!--        <input type="file" id="fileInput" style="display: block;" />-->
+        </label>
+        <input type="file" id="fileInput" style="display: none;"  multiple/>
     </div>
 <script src="js/main.js"></script>
 </body>
