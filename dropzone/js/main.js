@@ -49,10 +49,12 @@ function handlePreview(files) {
 
 function preview(file) {
     const img = document.createElement('img');
-    const imgParentContainer = document.createElement('div');
     const imageName = document.createElement('div');
+    const filesize = calculateImageSize(file)
+    const imgParentContainer = document.createElement('div');
+
     imgParentContainer.classList.add('image-parent-container');
-    imageName.textContent = modifyString(file.name);
+    imageName.textContent = `${modifyString(file.name)} (${filesize})`;
 
     if (file) {
         const reader = new FileReader();
@@ -77,3 +79,12 @@ function modifyString(originalStr) {
     return `${modifiedBaseName}${fileExtension ? '.' + fileExtension : ''}`;
 }
 
+function calculateImageSize(file) {
+    const sizeInBytes = file.size;
+    const sizeInKB = (sizeInBytes / 1024).toFixed(2); // Convert to KB
+    const sizeInMB = (sizeInKB / 1024).toFixed(2); // Convert to MB
+    if (sizeInMB < 1) {
+        return `${sizeInKB} kb`
+    }
+    return `${sizeInMB} mb`
+}
