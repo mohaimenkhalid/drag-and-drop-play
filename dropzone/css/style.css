@@ -23,7 +23,7 @@ body {
 #dropzone-items {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
     padding: 20px;
     overflow-y: hidden;
 }
@@ -56,5 +56,25 @@ body {
 }
 
 .image-parent-container {
+    position: relative;
+}
 
+.remove-button {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    background: red;
+    color: #fff;
+    transform: translate(40%, -40%);
+    border: none;
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    border: 2px solid red;
+    background: white;
+    color: #000000;
 }

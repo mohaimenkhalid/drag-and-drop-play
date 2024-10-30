@@ -3,7 +3,7 @@ const dropzone = document.querySelector('.dropzone');
 const dropzoneItem = document.querySelector('#dropzone-items');
 const placeholderContainer = document.querySelector('.placeholder-container');
 const fileInput = document.querySelector('#fileInput');
-
+let selectedFiles = [];
 //Register drag listeners
 dropzone.addEventListener('dragover', dragOver);
 dropzone.addEventListener('dragenter', dragEnter);
@@ -49,6 +49,7 @@ function handlePreview(files) {
     }
     //looping over files and preview image
     Array.from(files).forEach(function (file, index) {
+        selectedFiles.push(file)
         preview(file)
     })
 }
@@ -58,12 +59,18 @@ function preview(file) {
     const img = document.createElement('img');
     const imageName = document.createElement('div');
     const imgParentContainer = document.createElement('div');
+    const removeImageEl = document.createElement('button');
     const filesize = calculateImageSize(file)
-
     imgParentContainer.classList.add('image-parent-container');
+    imgParentContainer.classList.add(`dropzone-image-index-${selectedFiles.length}`)
+
     img.classList.add('dropzone-imagePreview');
     imageName.textContent = `${modifyString(file.name)} (${filesize})`;
 
+    removeImageEl.classList.add('remove-button')
+    removeImageEl.textContent = 'X'
+    removeImageEl.setAttribute('data-index', selectedFiles.length)
+    removeImageEl.addEventListener('click', removeImage)
     //read file
     if (file) {
         const reader = new FileReader();
@@ -75,11 +82,21 @@ function preview(file) {
             imgParentContainer.appendChild(img)
             //append image name into image container
             imgParentContainer.appendChild(imageName)
+            //append remove button into image container
+            imgParentContainer.appendChild(removeImageEl)
             //append image container into dropzoneItem
             dropzoneItem.appendChild(imgParentContainer);
         };
         reader.readAsDataURL(file);
     }
+}
+
+function removeImage(e) {
+    e.preventDefault()
+    const index = e.target.getAttribute('data-index');
+    console.log(`dropzone-image-index-${index}`)
+    const item = document.querySelector(`.dropzone-image-index-${index}`)
+    item.remove()
 }
 
 //short/modifying image name
